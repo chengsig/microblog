@@ -11,30 +11,24 @@ class AddCommentForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // on form input change, updates NewPostForm states
+    // on form input change, updates AddCommentForm states
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    // on form submit, calls handleAdd which will add new post to 
-    // App state. resets NewPostForm state and redirects to "/"
+    // on form submit, calls handleAdd which will add new comment to 
+    // App state. resets AddCommentForm state
     handleSubmit(e) {
         e.preventDefault();
-        //if id exist in props => editsubmit
-        //if id is undefined => addsubmit
         
-        this.props.handleAdd(this.state);
+        this.props.handleAddComment(this.props.postId, this.state);
        
         this.setState({
-            title: "", 
-            description: "",
-            body: ""
+            comment: "", 
         });
-
-        this.props.history.push("/");
     }
 
-    // rendres form for adding a new post 
+    // renders form for adding a new post 
     render() {
         return (
             <div className="AddCommentform">
@@ -43,7 +37,7 @@ class AddCommentForm extends Component {
                            value={this.state.comment}
                            onChange={this.handleChange}
                            placeholder="New Comment" />
-                    {/* <button onSubmit={} >Add</button> */}
+                    <button onSubmit={ this.handleSubmit }>Add</button>
                 </form>
             </div>
         );

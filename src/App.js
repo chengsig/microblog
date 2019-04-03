@@ -42,6 +42,15 @@ class App extends Component {
     })
   }
   
+  // adds new comment to App state
+  addComment(postId, comment){
+    let newComment = { ...comment, postId, id: uuid() }
+
+    this.setState(state => ({
+      comments: [ ...state.comments, newComment ]
+    }));
+  }
+
   //removes comment from App state by comment id
   deleteComment(commentId) {
     this.setState({

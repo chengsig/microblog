@@ -67,6 +67,7 @@ class PostDetail extends Component {
                 {editForm}
                 <h3>Comments</h3>
                 {comments}
+                <AddCommentForm postId={this.props.post.id}/>
             </div>
         );
     }
