@@ -16,12 +16,13 @@ class NewPostForm extends Component {
         this.handleCancel = this.handleCancel.bind(this);
     }
 
-    // on form input change, updates profile states
+    // on form input change, updates NewPostForm states
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    // on form submit, send updated data to backend update user route
+    // on form submit, calls handleAdd which will add new post to 
+    // App state. resets NewPostForm state and redirects to "/"
     handleSubmit(e) {
         e.preventDefault();
         this.props.handleAdd(this.state);
@@ -35,10 +36,12 @@ class NewPostForm extends Component {
         this.props.history.push("/");
     }
 
+    // redirects to "/"
     handleCancel() {
         this.props.history.push("/");
     }
 
+    // rendres form for adding a new post 
     render() {
         return (
             <div className="NewPostForm">

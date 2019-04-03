@@ -14,6 +14,7 @@ class App extends Component {
     this.addPost = this.addPost.bind(this);
   }
 
+  // adds new post to App state
   addPost(post){
     let newPost = { ...post, id: uuid() }
 
@@ -22,6 +23,7 @@ class App extends Component {
     }));
   }
 
+  // renders HeaderNav and Routes
   render() {
     return (
       <div className="App">

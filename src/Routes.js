@@ -6,7 +6,8 @@ import PostList from './PostList';
 import PostDetail from './PostDetail';
 
 class Routes extends Component {
-
+    // routes to "/", "/new", "/:postId"
+    // either renders PostList, NewPostForm, or PostDetail
     render() {
         return (
             <div className="Routes">

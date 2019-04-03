@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PostCard from "./PostCard";
 
 class PostList extends Component {
+    // renders list of PostCards
     render() {
         const posts = this.props.posts.map(p => (
             <PostCard id={ p.id }
@@ -13,7 +14,6 @@ class PostList extends Component {
         return (
             <div className="PostList">
                 {posts}
-                posts!
             </div>
         );
     }
