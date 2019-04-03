@@ -8,6 +8,8 @@ import PostDetail from './PostDetail';
 class Routes extends Component {
     // routes to "/", "/new", "/:postId"
     // either renders PostList, NewPostForm, or PostDetail
+
+    // might want to refactor
     render() {
         return (
             <div className="Routes">
@@ -20,7 +22,7 @@ class Routes extends Component {
                            render={(rtProps) => 
                                 <NewPostForm { ...rtProps } 
                                              handlePostAdd={ this.props.handlePostAdd }/>} />
-
+                    
                     <Route exact path="/:postId" 
                            render={(rtProps) => 
                                 <PostDetail { ...rtProps }

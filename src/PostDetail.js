@@ -28,6 +28,7 @@ class PostDetail extends Component {
         this.props.history.push("/");
     }
 
+    // calls handleCommentDelete, removes comment from App state by comment id
     handleCommentRemove(e) {
         this.props.handleCommentDelete(e.target.id);
     }
