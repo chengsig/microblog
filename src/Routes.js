@@ -23,8 +23,8 @@ class Routes extends Component {
 
                     <Route exact path="/:postId" 
                            render={(rtProps) => 
-                                <PostDetail
-                                            post={ this.props.posts.filter(p => p.id === rtProps.match.params.postId) }/>} />
+                                <PostDetail { ...rtProps }
+                                            post={ this.props.posts.filter(p => p.id === rtProps.match.params.postId)[0] }/>} />
 
                     <Redirect to="/" />
                 </Switch>
