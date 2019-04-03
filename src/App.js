@@ -10,8 +10,10 @@ class App extends Component {
     this.state = {
       posts: []
     }
+
     this.addPost = this.addPost.bind(this);
     this.editPost = this.editPost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }
 
   // adds new post to App state
@@ -31,6 +33,14 @@ class App extends Component {
     });
   }
 
+  // removes post from App state by id
+  deletePost(id) {
+    console.log(id);
+    this.setState({
+      posts: this.state.posts.filter(p => p.id !== id)
+    })
+  }
+
   // renders HeaderNav and Routes
   render() {
     return (
@@ -38,7 +48,8 @@ class App extends Component {
         <HeaderNav />
         <Routes posts={ this.state.posts } 
                 handleAdd={ this.addPost }
-                handleEdit={ this.editPost }/>
+                handleEdit={ this.editPost }
+                handleDelete={ this.deletePost }/>
       </div>
     );
   }

@@ -25,6 +25,7 @@ class Routes extends Component {
                            render={(rtProps) => 
                                 <PostDetail { ...rtProps }
                                             handleEdit={ this.props.handleEdit }
+                                            handleDelete={ this.props.handleDelete }
                                             post={ this.props.posts.filter(p => p.id === rtProps.match.params.postId)[0] }/>} />
 
                     <Redirect to="/" />
