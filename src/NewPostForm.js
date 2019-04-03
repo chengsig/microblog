@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import { Redirect } from 'react-router-dom';
 
 
 class NewPostForm extends Component {
@@ -25,8 +26,13 @@ class NewPostForm extends Component {
     // App state. resets NewPostForm state and redirects to "/"
     handleSubmit(e) {
         e.preventDefault();
-        this.props.handleAdd(this.state);
-
+        //if id exist in props => editsubmit
+        //if id is undefined => addsubmit
+        if (this.props.id === undefined) {
+            this.props.handleAdd(this.state);
+        } else {
+            this.props.handleEdit(this.props.id, this.state);
+        }
         this.setState({
             title: "", 
             description: "",

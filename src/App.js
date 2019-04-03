@@ -10,8 +10,8 @@ class App extends Component {
     this.state = {
       posts: []
     }
-    
     this.addPost = this.addPost.bind(this);
+    this.editPost = this.editPost.bind(this);
   }
 
   // adds new post to App state
@@ -23,12 +23,22 @@ class App extends Component {
     }));
   }
 
+  //edit an existing post from PostDetail page
+  editPost(id, post) {
+    let otherPosts = this.state.posts.filter(p => p.id !== id);
+    this.setState({
+      posts: [...otherPosts, {...post, id: id}]
+    });
+  }
+
   // renders HeaderNav and Routes
   render() {
     return (
       <div className="App">
         <HeaderNav />
-        <Routes posts={ this.state.posts } handleAdd={ this.addPost }/>
+        <Routes posts={ this.state.posts } 
+                handleAdd={ this.addPost }
+                handleEdit={ this.editPost }/>
       </div>
     );
   }
