@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
+
 import NewPostForm from './NewPostForm';
+import PostList from './PostList';
+import PostDetail from './PostDetail';
 
 class Routes extends Component {
 
@@ -10,16 +13,13 @@ class Routes extends Component {
                 <Switch>
                     <Route exact path="/" 
                            render={() => 
-                                <Homepage user={this.props.user} />} />
+                                <PostList />} />
                     
-                    <Route exact path="/companies/:handle" 
-                           render={(rtProps) => 
-                                <Company handle={rtProps.match.params.handle}
-                                         user={this.props.user}
-                                         handleApply={this.props.handleApply} />} />
+                    <Route exact path="/:postId" 
+                           render={() => 
+                                <PostDetail />} />
 
-
-                    <Route exact path="/companies" 
+                    <Route exact path="/new" 
                            render={() => 
                                 <NewPostForm />} />
 
