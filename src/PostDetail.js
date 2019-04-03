@@ -32,7 +32,8 @@ class PostDetail extends Component {
             this.props.history.push("/");
             return null;
         }
-        let editForm = null;
+
+        let editForm = null;å
         if (this.state.isEditing) {
             editForm = (
                 <NewPostForm id={ this.props.post.id } 
