@@ -8,12 +8,14 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      posts: []
+      posts: [], 
+      comments: [] //{postId: id(posts), comment: ""}
     }
 
     this.addPost = this.addPost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   // adds new post to App state
@@ -35,9 +37,15 @@ class App extends Component {
 
   // removes post from App state by id
   deletePost(id) {
-    console.log(id);
     this.setState({
       posts: this.state.posts.filter(p => p.id !== id)
+    })
+  }
+  
+  //removes comment from App state by comment id
+  deleteComment(commentId) {
+    this.setState({
+      comments: this.state.comments.filter(c => c.id !== commentId)
     })
   }
 
@@ -47,9 +55,11 @@ class App extends Component {
       <div className="App">
         <HeaderNav />
         <Routes posts={ this.state.posts } 
+                comments={ this.state.comments }
                 handleAdd={ this.addPost }
                 handleEdit={ this.editPost }
-                handleDelete={ this.deletePost }/>
+                handlePostDelete={ this.deletePost }
+                handleCommentDelete={ this.deleteComment }/>
       </div>
     );
   }
