@@ -15,6 +15,7 @@ class App extends Component {
     this.addPost = this.addPost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.addComment = this.addComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
   }
 
@@ -68,6 +69,7 @@ class App extends Component {
                 handlePostAdd={ this.addPost }
                 handlePostEdit={ this.editPost }
                 handlePostDelete={ this.deletePost }
+                handleCommentAdd={ this.addComment }
                 handleCommentDelete={ this.deleteComment }/>
       </div>
     );

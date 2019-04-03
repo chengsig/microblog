@@ -26,6 +26,7 @@ class Routes extends Component {
                                 <PostDetail { ...rtProps }
                                             handlePostEdit={ this.props.handlePostEdit }
                                             handlePostDelete={ this.props.handlePostDelete }
+                                            handleCommentAdd={ this.props.handleCommentAdd }
                                             handleCommentDelete={ this.props.handleCommentDelete }
                                             comments={ this.props.comments.filter(c => c.postId === rtProps.match.params.postId) }
                                             post={ this.props.posts.filter(p => p.id === rtProps.match.params.postId)[0] }/>} />

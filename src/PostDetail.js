@@ -8,7 +8,7 @@ class PostDetail extends Component {
         this.state = {
             isEditing: false,
         }
-        
+
         this.editing = this.editing.bind(this);
         this.handlePostRemove = this.handlePostRemove.bind(this);
         this.handleCommentRemove = this.handleCommentRemove.bind(this);
@@ -23,14 +23,15 @@ class PostDetail extends Component {
     }
 
     // calls handleDelete, which removes post from App state and redirects to "/"
-    handlePostRemove(e){
+    handlePostRemove(e) {
         this.props.handlePostDelete(this.props.post.id);
         this.props.history.push("/");
     }
 
     handleCommentRemove(e) {
-        this.props.handleCommentRemove(e.target.id);
+        this.props.handleCommentDelete(e.target.id);
     }
+
     // renders post detail
     // title, description, and body
     render() {
@@ -42,32 +43,37 @@ class PostDetail extends Component {
         let editForm = null;
         if (this.state.isEditing) {
             editForm = (
-                <NewPostForm id={ this.props.post.id } 
-                             handleEdit={ this.props.handleEdit }
-                             history={ this.props.history } />
+                <NewPostForm id={this.props.post.id}
+                    handleEdit={this.props.handleEdit}
+                    history={this.props.history} />
             )
         }
         let comments = null;
         if (this.props.comments.length !== 0) {
             comments = (this.props.comments.map(c => (
-            <div className="PostDetail-commentList">
-                <i id={c.id} class="fas fa-trash-alt" onClick={ this.handleCommentRemove }></i>
-                <p>{c.comment}</p>
-            </div>
+                <div className="PostDetail-commentList">
+                    <i id={c.id} class="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+                    <p>{c.comment}</p>
+                </div>
             )))
         }
 
         return (
             <div className="PostDetail">
-                <h2>{ this.props.post.title }</h2>
-                <i>{ this.props.post.description }</i>
-                <p>{ this.props.post.body }</p>
-                <i class="fas fa-edit" onClick={ this.editing }></i>
-                <i class="fas fa-trash-alt" onClick={ this.handlePostRemove }></i>
-                {editForm}
-                <h3>Comments</h3>
-                {comments}
-                <AddCommentForm postId={this.props.post.id}/>
+                <div className="PostDetail-post">
+                    <h2>{this.props.post.title}</h2>
+                    <i>{this.props.post.description}</i>
+                    <p>{this.props.post.body}</p>
+                    <i class="fas fa-edit" onClick={this.editing}></i>
+                    <i class="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
+                    {editForm}
+                </div>
+                <div className="PostDetail-comments">
+                    <h3>Comments</h3>
+                    {comments}
+                    <AddCommentForm postId={this.props.post.id}
+                        handleCommentAdd={this.props.handleCommentAdd} />
+                </div>
             </div>
         );
     }

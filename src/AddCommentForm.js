@@ -21,7 +21,7 @@ class AddCommentForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         
-        this.props.handleAddComment(this.props.postId, this.state);
+        this.props.handleCommentAdd(this.props.postId, this.state);
        
         this.setState({
             comment: "", 
@@ -32,12 +32,13 @@ class AddCommentForm extends Component {
     render() {
         return (
             <div className="AddCommentform">
-                <form clasName="AddCommentForm-comment">
+                <form clasName="AddCommentForm-comment" onSubmit={ this.handleSubmit }>
                     <input name="comment"
                            value={this.state.comment}
                            onChange={this.handleChange}
                            placeholder="New Comment" />
-                    <button onSubmit={ this.handleSubmit }>Add</button>
+                           
+                    <button>Add</button>
                 </form>
             </div>
         );
