@@ -15,13 +15,13 @@ class Routes extends Component {
                            render={() => 
                                 <PostList />} />
                     
+                    <Route exact path="/new" 
+                           render={(rtProps) => 
+                                <NewPostForm { ...rtProps }/>} />
+
                     <Route exact path="/:postId" 
                            render={() => 
                                 <PostDetail />} />
-
-                    <Route exact path="/new" 
-                           render={() => 
-                                <NewPostForm />} />
 
                     <Redirect to="/" />
                 </Switch>

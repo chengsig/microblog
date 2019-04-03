@@ -12,6 +12,7 @@ class NewPostForm extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
 
     // on form input change, updates profile states
@@ -23,6 +24,10 @@ class NewPostForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         //this.props.submitMethod();
+    }
+
+    handleCancel() {
+        this.props.history.push("/");
     }
 
     render() {
@@ -51,7 +56,8 @@ class NewPostForm extends Component {
                             onChange={this.handleChange}
                             value={this.state.body} />
                     </div>
-                    <button>Submit</button>
+                    <button>Save</button>
+                    <button onClick={ this.handleCancel }>Cancel</button>
                 </form>
             </div>
         );
