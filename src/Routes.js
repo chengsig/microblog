@@ -17,11 +17,13 @@ class Routes extends Component {
                     
                     <Route exact path="/new" 
                            render={(rtProps) => 
-                                <NewPostForm { ...rtProps } handleAdd={ this.props.handleAdd }/>} />
+                                <NewPostForm { ...rtProps } 
+                                             handleAdd={ this.props.handleAdd }/>} />
 
                     <Route exact path="/:postId" 
-                           render={() => 
-                                <PostDetail />} />
+                           render={(rtProps) => 
+                                <PostDetail
+                                            post={ this.props.posts.filter(p => p.id === rtProps.match.params.postId) }/>} />
 
                     <Redirect to="/" />
                 </Switch>
