@@ -7,17 +7,18 @@ export function addPost(post){
     }
 }
 
-export function editPost(post){
+export function editPost(id, post){
     return {
         type: EDIT_POST,
-        payload: post
+        payload: post,
+        postId: id
     }
 }
 
-export function deletePost(post){
+export function deletePost(postId){
     return {
         type: DELETE_POST,
-        payload: post
+        payload: postId
     }
 }
 
