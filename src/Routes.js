@@ -13,11 +13,11 @@ class Routes extends Component {
                 <Switch>
                     <Route exact path="/" 
                            render={() => 
-                                <PostList />} />
+                                <PostList posts={ this.props.posts }/>} />
                     
                     <Route exact path="/new" 
                            render={(rtProps) => 
-                                <NewPostForm { ...rtProps }/>} />
+                                <NewPostForm { ...rtProps } handleAdd={ this.props.handleAdd }/>} />
 
                     <Route exact path="/:postId" 
                            render={() => 

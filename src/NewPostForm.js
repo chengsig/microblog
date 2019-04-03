@@ -10,6 +10,7 @@ class NewPostForm extends Component {
             body: "",
             
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -23,7 +24,15 @@ class NewPostForm extends Component {
     // on form submit, send updated data to backend update user route
     handleSubmit(e) {
         e.preventDefault();
-        //this.props.submitMethod();
+        this.props.handleAdd(this.state);
+
+        this.setState({
+            title: "", 
+            description: "",
+            body: ""
+        });
+
+        this.props.history.push("/");
     }
 
     handleCancel() {
