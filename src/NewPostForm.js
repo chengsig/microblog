@@ -29,9 +29,9 @@ class NewPostForm extends Component {
         //if id exist in props => editsubmit
         //if id is undefined => addsubmit
         if (this.props.id === undefined) {
-            this.props.handleAdd(this.state);
+            this.props.handlePostAdd(this.state);
         } else {
-            this.props.handleEdit(this.props.id, this.state);
+            this.props.handlePostEdit(this.props.id, this.state);
         }
         this.setState({
             title: "", 

@@ -65,8 +65,8 @@ class App extends Component {
         <HeaderNav />
         <Routes posts={ this.state.posts } 
                 comments={ this.state.comments }
-                handleAdd={ this.addPost }
-                handleEdit={ this.editPost }
+                handlePostAdd={ this.addPost }
+                handlePostEdit={ this.editPost }
                 handlePostDelete={ this.deletePost }
                 handleCommentDelete={ this.deleteComment }/>
       </div>

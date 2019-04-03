@@ -19,12 +19,12 @@ class Routes extends Component {
                     <Route exact path="/new" 
                            render={(rtProps) => 
                                 <NewPostForm { ...rtProps } 
-                                             handleAdd={ this.props.handleAdd }/>} />
+                                             handlePostAdd={ this.props.handlePostAdd }/>} />
 
                     <Route exact path="/:postId" 
                            render={(rtProps) => 
                                 <PostDetail { ...rtProps }
-                                            handleEdit={ this.props.handleEdit }
+                                            handlePostEdit={ this.props.handlePostEdit }
                                             handlePostDelete={ this.props.handlePostDelete }
                                             handleCommentDelete={ this.props.handleCommentDelete }
                                             comments={ this.props.comments.filter(c => c.postId === rtProps.match.params.postId) }
