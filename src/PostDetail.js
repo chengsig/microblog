@@ -8,14 +8,14 @@ class PostDetail extends Component {
             this.props.history.push("/");
             return null;
         }
-
+        // do we need button?
         return (
             <div className="PostDetail">
                 <h2>{this.props.post.title}</h2>
-                {this.props.post.description}
-                {this.props.post.body}
-                <button></button>
-                <button></button>
+                <i>{this.props.post.description}</i>
+                <p>{this.props.post.body}</p>
+                <button><i class="fas fa-edit"></i></button>
+                <button><i class="fas fa-trash-alt"></i></button>
             </div>
         );
     }
