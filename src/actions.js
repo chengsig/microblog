@@ -22,16 +22,18 @@ export function deletePost(postId){
     }
 }
 
-export function addComment(comment){
+export function addComment(postId, comment){
     return {
         type: ADD_COMMENT,
-        payload: comment
+        payload: comment,
+        postId
     }
 }
 
-export function deleteComment(comment){
+export function deleteComment(postId, commentId){
     return {
         type: DELETE_COMMENT,
-        payload: comment
+        postId, 
+        commentId
     }
 }

@@ -53,7 +53,7 @@ class App extends Component {
   }
 
   //removes comment from App state by comment id
-  deleteComment(commentId) {
+  deleteComment(postId, commentId) {
     this.setState({
       comments: this.state.comments.filter(c => c.id !== commentId)
     })

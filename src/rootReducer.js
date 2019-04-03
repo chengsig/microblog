@@ -9,25 +9,48 @@ const DEFAULT_STATE = {
 function rootReducer(state=DEFAULT_STATE, action) {
     if (action.type === ADD_POST) {
         const postId = uuid();
+
         return { 
             ...state,
             posts: {...state.posts, [postId]: action.payload }
         }
     }
+
     if(action.type === EDIT_POST) {
         let postId = state.posts.postId;
+
         return {
             ...state,
             posts: {...state.posts, [postId]: {...action.payload} }
         }
     }
+
     if (action.type === DELETE_POST) {
         let stateCopy = { ...state }
         delete stateCopy.posts.postId;
         delete stateCopy.comments.postId;
+
         return stateCopy;
     }
-    if ()
+
+    if (action.type === ADD_COMMENT){
+        const commentId = uuid();
+
+        return { 
+            ...state,
+            comments: { 
+                ...state.comments, 
+                [action.postId]: { ...state.comments.postId, 
+                                   [commentId]: { ...action.payload } }}
+        }
+    }
+
+    if (action.type === DELETE_COMMENT){
+        let stateCopy = { ...state }
+
+        delete stateCopy.comments.postId.commentId
+    }
+
     return { ...state };
 }
 

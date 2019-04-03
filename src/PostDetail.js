@@ -30,7 +30,7 @@ class PostDetail extends Component {
 
     // calls handleCommentDelete, removes comment from App state by comment id
     handleCommentRemove(e) {
-        this.props.handleCommentDelete(e.target.id);
+        this.props.handleCommentDelete(this.props.post.id, e.target.id);
     }
 
     // renders post detail
