@@ -4,12 +4,16 @@ import PostCard from "./PostCard";
 class PostList extends Component {
     // renders list of PostCards
     render() {
-        const posts = this.props.posts.map(p => (
-            <PostCard id={ p.id }
-                      title={ p.title }
-                      description={ p.description }
-                      body={ p.body }/>
-        ));
+        let posts = [];
+        for (let id in this.props.posts) {
+            posts.push(
+            <PostCard key={id}
+                id={id}
+                title={ this.props.posts[id].title }
+                description={ this.props.posts[id].description }
+                body={ this.props.posts[id].body }/>
+            )
+        }
 
         return (
             <div className="PostList">

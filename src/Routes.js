@@ -31,8 +31,8 @@ class Routes extends Component {
                                             handlePostDelete={ this.props.handlePostDelete }
                                             handleCommentAdd={ this.props.handleCommentAdd }
                                             handleCommentDelete={ this.props.handleCommentDelete }
-                                            comments={ this.props.comments.filter(c => c.postId === rtProps.match.params.postId) }
-                                            post={ this.props.posts.filter(p => p.id === rtProps.match.params.postId)[0] }/>} />
+                                            comments={ this.props.posts[rtProps.match.params.postId].comments }
+                                            post={ this.props.posts[rtProps.match.params.postId] }/>} />
 
                     <Redirect to="/" />
                 </Switch>

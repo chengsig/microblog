@@ -14,7 +14,6 @@ class App extends Component {
       <div className="App">
         <HeaderNav />
         <Routes posts={ this.props.posts } 
-                comments={ this.props.comments }
                 handlePostAdd={ this.props.addPost }
                 handlePostEdit={ this.props.editPost }
                 handlePostDelete={ this.props.deletePost }

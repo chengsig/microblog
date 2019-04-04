@@ -2,8 +2,7 @@ import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from ".
 import uuid from "uuid/v4";
 
 const DEFAULT_STATE = {
-    posts: {}, //postId as key {postId: {...post}, ...}
-    comments: {} //{postId: {commentId: "comment", ...}, ...}
+    posts: {}, //postId as key {postId: {...post, comments: {1: "wow", 2: ""...}}, ...}
 };
 
 function rootReducer(state=DEFAULT_STATE, action) {
@@ -28,27 +27,27 @@ function rootReducer(state=DEFAULT_STATE, action) {
     if (action.type === DELETE_POST) {
         let stateCopy = { ...state }
         delete stateCopy.posts.postId;
-        delete stateCopy.comments.postId;
 
         return stateCopy;
     }
 
     if (action.type === ADD_COMMENT){
         const commentId = uuid();
+        let currPost = state.posts.postId;
 
         return { 
-            ...state,
-            comments: { 
-                ...state.comments, 
-                [action.postId]: { ...state.comments.postId, 
-                                   [commentId]: { ...action.payload } }}
+            posts: {...state.posts, 
+                    [action.postId]: {...currPost, 
+                                        comments: {...currPost.comments, 
+                                                        [commentId]: action.payload}} }
         }
     }
 
     if (action.type === DELETE_COMMENT){
         let stateCopy = { ...state }
 
-        delete stateCopy.comments.postId.commentId
+        delete stateCopy.posts.postId.comments.commentId;
+        return stateCopy;
     }
 
     return { ...state };
