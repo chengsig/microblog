@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import NewPostForm from './NewPostForm';
+import NewPostForm from './NewOrEditPostForm';
 import PostList from './PostList';
 import PostDetail from './PostDetail';
 
@@ -9,7 +9,6 @@ class Routes extends Component {
     // routes to "/", "/new", "/:postId"
     // either renders PostList, NewPostForm, or PostDetail
 
-    // might want to refactor
     render() {
         return (
             <div className="Routes">

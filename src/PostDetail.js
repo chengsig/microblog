@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NewPostForm from './NewPostForm';
+import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
 import { editPost, deletePost, addComment, deleteComment } from "./actions";
@@ -32,14 +32,12 @@ class PostDetail extends Component {
 
     // calls handleCommentDelete, removes comment from App state by comment id
     handleCommentRemove(e) {
-        console.log("POSTID", this.props.postId, "COMMENT", e.target.id)
         this.props.deleteComment(this.props.postId, e.target.id);
     }
 
     // renders post detail
     // title, description, and body
     render() {
-        console.log("postdetail render", this.props.post)
         if (this.props.post === undefined) {
             this.props.history.push("/");
             return null;
@@ -48,8 +46,9 @@ class PostDetail extends Component {
         let editForm = null;
         if (this.state.isEditing) {
             editForm = (
-                <NewPostForm id={this.props.post.id}
+                <NewOrEditPostForm id={this.props.postId}
                     handlePostEdit={this.props.editPost}
+                    isEditing={this.state.isEditing}
                     history={this.props.history} />
             )
         }

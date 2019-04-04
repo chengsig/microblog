@@ -1,9 +1,11 @@
 import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import uuid from "uuid/v4";
 
 export function addPost(post){
     return {
         type: ADD_POST,
-        payload: post
+        payload: post,
+        postId: uuid()
     }
 }
 
@@ -26,7 +28,8 @@ export function addComment(postId, comment){
     return {
         type: ADD_COMMENT,
         payload: comment,
-        postId
+        postId,
+        commentId: uuid()
     }
 }
 
