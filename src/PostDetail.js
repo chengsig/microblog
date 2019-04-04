@@ -49,14 +49,14 @@ class PostDetail extends Component {
                     history={this.props.history} />
             )
         }
-        let comments = null;
-        if (this.props.comments.length !== 0) {
-            comments = (this.props.comments.map(c => (
-                <div className="PostDetail-commentList">
-                    <i id={c.id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
-                    <p>{c.comment}</p>
-                </div>
-            )))
+        let comments = [];
+        if (this.props.post.comments !== undefined) {
+            for (let key in this.props.post.comments){
+                comments.push(<div className="PostDetail-commentList">
+                    <i id={key} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+                    <p>{this.props.post.comments[key]}</p>
+                </div>)
+            }
         }
 
         return (
@@ -72,7 +72,7 @@ class PostDetail extends Component {
                 <div className="PostDetail-comments">
                     <h3>Comments</h3>
                     {comments}
-                    <AddCommentForm postId={this.props.post.id}
+                    <AddCommentForm postId={this.props.postId}
                         handleCommentAdd={this.props.handleCommentAdd} />
                 </div>
             </div>

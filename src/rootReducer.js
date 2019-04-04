@@ -5,22 +5,22 @@ const DEFAULT_STATE = {
     posts: {}, //postId as key {postId: {...post, comments: {1: "wow", 2: ""...}}, ...}
 };
 
-function rootReducer(state=DEFAULT_STATE, action) {
+function rootReducer(state = DEFAULT_STATE, action) {
     if (action.type === ADD_POST) {
         const postId = uuid();
 
-        return { 
+        return {
             ...state,
-            posts: {...state.posts, [postId]: action.payload }
+            posts: { ...state.posts, [postId]: action.payload }
         }
     }
 
-    if(action.type === EDIT_POST) {
+    if (action.type === EDIT_POST) {
         let postId = state.posts.postId;
 
         return {
             ...state,
-            posts: {...state.posts, [postId]: {...action.payload} }
+            posts: { ...state.posts, [postId]: { ...action.payload } }
         }
     }
 
@@ -31,19 +31,27 @@ function rootReducer(state=DEFAULT_STATE, action) {
         return stateCopy;
     }
 
-    if (action.type === ADD_COMMENT){
+    if (action.type === ADD_COMMENT) {
         const commentId = uuid();
-        let currPost = state.posts.postId;
 
-        return { 
-            posts: {...state.posts, 
-                    [action.postId]: {...currPost, 
-                                        comments: {...currPost.comments, 
-                                                        [commentId]: action.payload}} }
+        let postId = action.postId;
+        let currPost = state.posts[postId];
+
+        return {
+            posts: {
+                ...state.posts,
+                [action.postId]: {
+                    ...currPost,
+                    comments: {
+                        ...currPost.comments,
+                        [commentId]: action.payload.comment
+                    }
+                }
+            }
         }
     }
 
-    if (action.type === DELETE_COMMENT){
+    if (action.type === DELETE_COMMENT) {
         let stateCopy = { ...state }
 
         delete stateCopy.posts.postId.comments.commentId;
