@@ -39,7 +39,7 @@ class PostDetail extends Component {
     // renders post detail
     // title, description, and body
     render() {
-        console.log(this.props.post)
+        console.log("postdetail render", this.props.post)
         if (this.props.post === undefined) {
             this.props.history.push("/");
             return null;

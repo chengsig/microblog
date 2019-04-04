@@ -7,7 +7,7 @@ const DEFAULT_STATE = {
 
 function rootReducer(state = DEFAULT_STATE, action) {
     if (action.type === ADD_POST) {
-        const postId = uuid();
+        const postId = uuid();  // FIXME move this get-id to action creator/component
 
         return {
             ...state,
@@ -25,16 +25,23 @@ function rootReducer(state = DEFAULT_STATE, action) {
     }
 
     if (action.type === DELETE_POST) {
-        let stateCopy = { ...state }
+        // let stateCopy = { ...state }
         let postId = action.payload;
 
-        delete stateCopy.posts[postId];
+        let updatedPosts = {...state.posts}
+        delete updatedPosts[postId]
 
-        return { ...stateCopy };
+        return {
+            ...state, 
+            posts: updatedPosts
+          }
+        // delete stateCopy.posts[postId]; // mutating
+
+        // return { ...stateCopy };
     }
 
     if (action.type === ADD_COMMENT) {
-        const commentId = uuid();
+        const commentId = uuid();  // FIXME
 
         let postId = action.postId;
         let currPost = state.posts[postId];
@@ -57,16 +64,25 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     if (action.type === DELETE_COMMENT) {
         console.log(action.postId, action.commentId)
-        let stateCopy = { ...state }
         let postId = action.postId;
         let commentId = action.commentId;
 
-        delete stateCopy.posts[postId].comments[commentId];
+        let updatedComments = {...state.posts[postId].comments}
+        delete updatedComments[commentId]
 
-        return { ...stateCopy };
+        return {...state, 
+                posts: {
+                    ...state.posts, 
+                    [postId]: {... state.posts[postId], comments: updatedComments}}}
+
+        //             let stateCopy = { ...state }
+
+        // delete stateCopy.posts[postId].comments[commentId];
+
+        // return { ...stateCopy };
     }
 
-    return { ...state };
+    return state;
 }
 
 export default rootReducer;
