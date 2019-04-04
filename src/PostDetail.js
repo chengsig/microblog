@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import NewPostForm from './NewPostForm';
 import AddCommentForm from './AddCommentForm';
+import Comment from './Comment';
+import { connect } from "react-redux";
+import { addPost, editPost, deletePost, addComment, deleteComment } from "./actions";
 
 class PostDetail extends Component {
     constructor(props) {
@@ -30,12 +33,14 @@ class PostDetail extends Component {
 
     // calls handleCommentDelete, removes comment from App state by comment id
     handleCommentRemove(e) {
+        console.log("POSTID", this.props.postId, "COMMENT", e.target.id)
         this.props.handleCommentDelete(this.props.postId, e.target.id);
     }
 
     // renders post detail
     // title, description, and body
     render() {
+        console.log(this.props.post)
         if (this.props.post === undefined) {
             this.props.history.push("/");
             return null;
@@ -49,15 +54,18 @@ class PostDetail extends Component {
                     history={this.props.history} />
             )
         }
-        
+
         let comments = [];
 
         if (this.props.post.comments !== undefined) {
             for (let key in this.props.post.comments){
-                comments.push(<div className="PostDetail-commentList" key={key}>
-                    <i id={key} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
-                    <p>{this.props.post.comments[key]}</p>
-                </div>)
+                comments.push(
+                    <Comment key={ key }
+                             comment={ this.props.post.comments[key] }
+                             handleSubmit={ this.props.handleCommentDelete } 
+                             postId={this.props.postId}
+                             id={ key }/>
+                )
             }
         }
 
@@ -82,4 +90,13 @@ class PostDetail extends Component {
     }
 }
 
-export default PostDetail;
+function mapStateToProps(state){
+    return {
+        posts: state.posts
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { addPost, editPost, deletePost, addComment, deleteComment }
+)(PostDetail);

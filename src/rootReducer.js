@@ -39,7 +39,7 @@ function rootReducer(state = DEFAULT_STATE, action) {
         let postId = action.postId;
         let currPost = state.posts[postId];
 
-        return {
+        let result = {
             posts: {
                 ...state.posts,
                 [action.postId]: {
@@ -51,13 +51,16 @@ function rootReducer(state = DEFAULT_STATE, action) {
                 }
             }
         }
+
+        return result
     }
 
     if (action.type === DELETE_COMMENT) {
         let stateCopy = { ...state }
+        let postId = action.postId;
         let commentId = action.commentId;
-        console.log(commentId)
-        delete stateCopy.posts[action.postId].comments[commentId];
+
+        delete stateCopy.posts[postId].comments[commentId];
 
         return { ...stateCopy };
     }
