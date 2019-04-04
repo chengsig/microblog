@@ -16,7 +16,7 @@ class Routes extends Component {
                 <Switch>
                     <Route exact path="/" 
                            render={() => 
-                                <PostList posts={ this.props.posts }/>} />
+                                <PostList />} />
                     
                     <Route exact path="/new" 
                            render={(rtProps) => 

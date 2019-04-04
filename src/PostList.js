@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PostCard from "./PostCard";
+import { connect } from "react-redux";
 
 class PostList extends Component {
     // renders list of PostCards
@@ -23,4 +24,12 @@ class PostList extends Component {
     }
 }
 
-export default PostList;
+function mapStateToProps(state){
+    return {
+        posts: state.posts
+    }
+}
+
+export default connect(
+    mapStateToProps,
+)(PostList);
