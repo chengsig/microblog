@@ -6,9 +6,9 @@ class NewOrEditPostForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            description: "",
-            body: "",
+            title: this.props.post.title,
+            description: this.props.post.description,
+            body: this.props.post.body
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -50,6 +50,10 @@ class NewOrEditPostForm extends Component {
     // renders form for adding a new post 
     render() {
         let formName = this.props.isEditing ? "Edit Post" : "New Post";
+        // let placeholderTitle = this.props.post.title || "";
+        // let placeholderDescription = this.props.isEditing ? this.props.posts.id.description : "";
+        // let placeholderBody = this.props.isEditing ? this.props.posts.id.body : "";
+        console.log(this.props.post);
         return (
             <div className="NewOrEditPostForm">
                 <p>{formName}</p>
@@ -59,21 +63,27 @@ class NewOrEditPostForm extends Component {
                         <input name="title"
                             id="title"
                             onChange={this.handleChange}
-                            value={this.state.title} />
+                            value={this.state.title} 
+                            // placeholder={placeholderTitle}
+                            />
                     </div>
                     <div className="NewOrEditPostForm-description">
                         <label htmlFor="description">Description: </label>
                         <input name="description"
                             id="description"
                             onChange={this.handleChange}
-                            value={this.state.description} />
+                            value={this.state.description} 
+                            // placeholder={placeholderDescription}
+                            />
                     </div>
                     <div className="NewOrEditPostForm-body">
                         <label htmlFor="body">Body: </label>
                         <input name="body"
                             id="body"
                             onChange={this.handleChange}
-                            value={this.state.body} />
+                            value={this.state.body} 
+                            // placeholder={placeholderBody}
+                            />
                     </div>
                     <button>Save</button>
                     <button onClick={ this.handleCancel }>Cancel</button>
@@ -83,9 +93,9 @@ class NewOrEditPostForm extends Component {
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps){
     return {
-        posts: state.posts
+        post: state.posts[ownProps.id] || {title: "", description: "", body: ""}
     }
 }
 
