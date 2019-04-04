@@ -26,9 +26,11 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     if (action.type === DELETE_POST) {
         let stateCopy = { ...state }
-        delete stateCopy.posts.postId;
+        let postId = action.payload;
 
-        return stateCopy;
+        delete stateCopy.posts[postId];
+
+        return { ...stateCopy };
     }
 
     if (action.type === ADD_COMMENT) {
@@ -54,11 +56,10 @@ function rootReducer(state = DEFAULT_STATE, action) {
     if (action.type === DELETE_COMMENT) {
         let stateCopy = { ...state }
         let commentId = action.commentId;
-        console.log('stateCopy', stateCopy.posts[action.postId])
+        console.log(commentId)
         delete stateCopy.posts[action.postId].comments[commentId];
-        
-        console.log(stateCopy.posts[action.postId])
-        return stateCopy;
+
+        return { ...stateCopy };
     }
 
     return { ...state };

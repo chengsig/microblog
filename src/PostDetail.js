@@ -24,7 +24,7 @@ class PostDetail extends Component {
 
     // calls handleDelete, which removes post from App state and redirects to "/"
     handlePostRemove(e) {
-        this.props.handlePostDelete(this.props.post.id);
+        this.props.handlePostDelete(this.props.postId);
         this.props.history.push("/");
     }
 
@@ -49,8 +49,9 @@ class PostDetail extends Component {
                     history={this.props.history} />
             )
         }
+        
         let comments = [];
-        console.log('still have comments?', this.props.post.comments)
+
         if (this.props.post.comments !== undefined) {
             for (let key in this.props.post.comments){
                 comments.push(<div className="PostDetail-commentList" key={key}>
