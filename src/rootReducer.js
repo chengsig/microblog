@@ -53,8 +53,11 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     if (action.type === DELETE_COMMENT) {
         let stateCopy = { ...state }
-
-        delete stateCopy.posts.postId.comments.commentId;
+        let commentId = action.commentId;
+        console.log('stateCopy', stateCopy.posts[action.postId])
+        delete stateCopy.posts[action.postId].comments[commentId];
+        
+        console.log(stateCopy.posts[action.postId])
         return stateCopy;
     }
 

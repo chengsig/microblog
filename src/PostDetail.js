@@ -30,7 +30,7 @@ class PostDetail extends Component {
 
     // calls handleCommentDelete, removes comment from App state by comment id
     handleCommentRemove(e) {
-        this.props.handleCommentDelete(this.props.post.id, e.target.id);
+        this.props.handleCommentDelete(this.props.postId, e.target.id);
     }
 
     // renders post detail
@@ -50,6 +50,7 @@ class PostDetail extends Component {
             )
         }
         let comments = [];
+        console.log('still have comments?', this.props.post.comments)
         if (this.props.post.comments !== undefined) {
             for (let key in this.props.post.comments){
                 comments.push(<div className="PostDetail-commentList" key={key}>
