@@ -24,7 +24,6 @@ class Routes extends Component {
                     <Route exact path="/:postId" 
                            render={(rtProps) => 
                                 <PostDetail { ...rtProps }
-                                            post={ this.props.posts[rtProps.match.params.postId] }
                                             postId = { rtProps.match.params.postId }/>} /> 
 
                     <Redirect to="/" />

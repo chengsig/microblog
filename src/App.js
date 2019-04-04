@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import HeaderNav from './HeaderNav';
 import Routes from './Routes';
-import { connect } from "react-redux";
-
-// making sure everything still works 
 
 class App extends Component {
 // renders HeaderNav and Routes
@@ -12,18 +9,10 @@ class App extends Component {
     return (
       <div className="App">
         <HeaderNav />
-        <Routes posts={ this.props.posts }/>
+        <Routes/>
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
-    return {
-        posts: state.posts
-    }
-}
-
-export default connect(
-    mapStateToProps
-)(App);
+export default App;

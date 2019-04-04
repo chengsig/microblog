@@ -53,18 +53,15 @@ class PostDetail extends Component {
             )
         }
 
-        let comments = [];
-
-        if (this.props.post.comments !== undefined) {
-            for (let key in this.props.post.comments) {
-                comments.push(
-                    <div className="Comment" key={ key }>
-                        <p>{this.props.post.comments[key]}</p>
-                        <i id={ key } className="fas fa-trash-alt" onClick={ this.handleCommentRemove }></i>
-                    </div>
-                )   
-            }
-        }
+    
+        let entries = Object.entries(this.props.post.comments);
+        let comments = entries.map(c => (
+            console.log('what is c?', c[1]),
+            <div className="Comment" key={c[0]}>
+                <p>{c[1]}</p>
+                <i id={c[0]} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+            </div>
+        ))
 
         return (
             <div className="PostDetail">
@@ -87,9 +84,9 @@ class PostDetail extends Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
     return {
-        posts: state.posts
+        post: state.posts[ownProps.postId]
     }
 }
 
