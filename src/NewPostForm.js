@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-//import { Redirect } from 'react-router-dom';
-
+import { connect } from "react-redux";
+import { addPost, editPost } from "./actions";
 
 class NewPostForm extends Component {
     constructor(props) {
@@ -29,9 +29,9 @@ class NewPostForm extends Component {
         //if id exist in props => editsubmit
         //if id is undefined => addsubmit
         if (this.props.id === undefined) {
-            this.props.handlePostAdd(this.state);
+            this.props.addPost(this.state);
         } else {
-            this.props.handlePostEdit(this.props.id, this.state);
+            this.props.editPost(this.props.id, this.state);
         }
 
         this.setState({
@@ -48,7 +48,7 @@ class NewPostForm extends Component {
         this.props.history.push("/");
     }
 
-    // rendres form for adding a new post 
+    // renders form for adding a new post 
     render() {
         return (
             <div className="NewPostForm">
@@ -83,4 +83,13 @@ class NewPostForm extends Component {
     }
 }
 
-export default NewPostForm;
+function mapStateToProps(state){
+    return {
+        posts: state.posts
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { addPost, editPost }
+)(NewPostForm);

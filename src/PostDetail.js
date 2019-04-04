@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import NewPostForm from './NewPostForm';
 import AddCommentForm from './AddCommentForm';
-import Comment from './Comment';
 import { connect } from "react-redux";
-import { addPost, editPost, deletePost, addComment, deleteComment } from "./actions";
+import { editPost, deletePost, addComment, deleteComment } from "./actions";
 
 class PostDetail extends Component {
     constructor(props) {
@@ -27,14 +26,14 @@ class PostDetail extends Component {
 
     // calls handleDelete, which removes post from App state and redirects to "/"
     handlePostRemove(e) {
-        this.props.handlePostDelete(this.props.postId);
+        this.props.deletePost(this.props.postId);
         this.props.history.push("/");
     }
 
     // calls handleCommentDelete, removes comment from App state by comment id
     handleCommentRemove(e) {
         console.log("POSTID", this.props.postId, "COMMENT", e.target.id)
-        this.props.handleCommentDelete(this.props.postId, e.target.id);
+        this.props.deleteComment(this.props.postId, e.target.id);
     }
 
     // renders post detail
@@ -50,7 +49,7 @@ class PostDetail extends Component {
         if (this.state.isEditing) {
             editForm = (
                 <NewPostForm id={this.props.post.id}
-                    handlePostEdit={this.props.handlePostEdit}
+                    handlePostEdit={this.props.editPost}
                     history={this.props.history} />
             )
         }
@@ -58,14 +57,13 @@ class PostDetail extends Component {
         let comments = [];
 
         if (this.props.post.comments !== undefined) {
-            for (let key in this.props.post.comments){
+            for (let key in this.props.post.comments) {
                 comments.push(
-                    <Comment key={ key }
-                             comment={ this.props.post.comments[key] }
-                             handleSubmit={ this.props.handleCommentDelete } 
-                             postId={this.props.postId}
-                             id={ key }/>
-                )
+                    <div className="Comment" key={ key }>
+                        <p>{this.props.post.comments[key]}</p>
+                        <i id={ key } className="fas fa-trash-alt" onClick={ this.handleCommentRemove }></i>
+                    </div>
+                )   
             }
         }
 
@@ -83,14 +81,14 @@ class PostDetail extends Component {
                     <h3>Comments</h3>
                     {comments}
                     <AddCommentForm postId={this.props.postId}
-                        handleCommentAdd={this.props.handleCommentAdd} />
+                        handleCommentAdd={this.props.addComment} />
                 </div>
             </div>
         );
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
         posts: state.posts
     }
@@ -98,5 +96,5 @@ function mapStateToProps(state){
 
 export default connect(
     mapStateToProps,
-    { addPost, editPost, deletePost, addComment, deleteComment }
+    { editPost, deletePost, addComment, deleteComment }
 )(PostDetail);
