@@ -21,7 +21,8 @@ class Routes extends Component {
                     <Route exact path="/new" 
                            render={(rtProps) => 
                                 <NewPostForm { ...rtProps } 
-                                             handlePostAdd={ this.props.handlePostAdd }/>} />
+                                             handlePostAdd={ this.props.handlePostAdd }
+                                             handlePostEdit={ this.props.handlePostEdit } />} />
                     
                     <Route exact path="/:postId" 
                            render={(rtProps) => 

@@ -45,7 +45,7 @@ class PostDetail extends Component {
         if (this.state.isEditing) {
             editForm = (
                 <NewPostForm id={this.props.post.id}
-                    handleEdit={this.props.handleEdit}
+                    handlePostEdit={this.props.handlePostEdit}
                     history={this.props.history} />
             )
         }
@@ -53,7 +53,7 @@ class PostDetail extends Component {
         if (this.props.comments.length !== 0) {
             comments = (this.props.comments.map(c => (
                 <div className="PostDetail-commentList">
-                    <i id={c.id} class="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+                    <i id={c.id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
                     <p>{c.comment}</p>
                 </div>
             )))
@@ -65,8 +65,8 @@ class PostDetail extends Component {
                     <h2>{this.props.post.title}</h2>
                     <i>{this.props.post.description}</i>
                     <p>{this.props.post.body}</p>
-                    <i class="fas fa-edit" onClick={this.editing}></i>
-                    <i class="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
+                    <i className="fas fa-edit" onClick={this.editing}></i>
+                    <i className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
                     {editForm}
                 </div>
                 <div className="PostDetail-comments">

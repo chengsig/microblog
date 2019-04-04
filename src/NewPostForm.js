@@ -33,6 +33,7 @@ class NewPostForm extends Component {
         } else {
             this.props.handlePostEdit(this.props.id, this.state);
         }
+
         this.setState({
             title: "", 
             description: "",

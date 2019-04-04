@@ -32,7 +32,7 @@ class AddCommentForm extends Component {
     render() {
         return (
             <div className="AddCommentform">
-                <form clasName="AddCommentForm-comment" onSubmit={ this.handleSubmit }>
+                <form className="AddCommentForm-comment" onSubmit={ this.handleSubmit }>
                     <input name="comment"
                            value={this.state.comment}
                            onChange={this.handleChange}
