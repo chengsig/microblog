@@ -52,7 +52,7 @@ class PostDetail extends Component {
         let comments = [];
         if (this.props.post.comments !== undefined) {
             for (let key in this.props.post.comments){
-                comments.push(<div className="PostDetail-commentList">
+                comments.push(<div className="PostDetail-commentList" key={key}>
                     <i id={key} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
                     <p>{this.props.post.comments[key]}</p>
                 </div>)
