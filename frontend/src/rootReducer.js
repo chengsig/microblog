@@ -9,9 +9,12 @@ const DEFAULT_STATE = {
 function rootReducer(state = DEFAULT_STATE, action) {
     //adding a post to store state
     if (action.type === ADD_POST) {
+        let newPost = action.post;
+        delete newPost.body
+
         return {
             ...state,
-            posts: { ...state.posts, [action.postId]: { ...action.payload, comments: {} } }
+            titles: [ ...state.titles, newPost ]
         }
     }
 

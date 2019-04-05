@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addPost, editPost } from "./actions";
+import { editPost, addPostToAPI } from "./actions";
 
 class NewOrEditPostForm extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ class NewOrEditPostForm extends Component {
         //if id exist in props => editsubmit
         //if id is undefined => addsubmit
         if (this.props.id === undefined) {
-            this.props.addPost(this.state);
+            this.props.addPostToAPI(this.state);
         } else {
             this.props.editPost(this.props.id, this.state);
         }
@@ -97,5 +97,5 @@ function mapStateToProps(state, ownProps){
 
 export default connect(
     mapStateToProps,
-    { addPost, editPost }
+    { addPostToAPI, editPost }
 )(NewOrEditPostForm);

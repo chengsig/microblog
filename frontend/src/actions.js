@@ -7,8 +7,7 @@ const BASE_URL = 'http://localhost:5000/api';
 export function addPost(post) {
     return {
         type: ADD_POST,
-        payload: post,
-        postId: uuid()
+        post
     }
 }
 
@@ -70,7 +69,7 @@ export function getPostFromAPI(id) {
             const res = await axios.get(`${BASE_URL}/posts/${id}`);
             const post = res.data;
 
-            dispatch(gotPost(id, post))
+            dispatch(gotPost(post))
         } catch (err) {
             console.log(err);
             const errMsg = err.response.data;
@@ -78,6 +77,40 @@ export function getPostFromAPI(id) {
         }
     }
 }
+
+export function addPostToAPI(post) {
+    return async function (dispatch) {
+        dispatch(startLoad());
+
+        try {
+            const res = await axios.post(`${BASE_URL}/posts`, post);
+            const createdPost = res.data;
+
+            dispatch(addPost(createdPost))
+        } catch (err) {
+            console.log(err);
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
+    }
+}
+
+// export function editPostFromAPI(id, post) {
+//     return async function (dispatch) {
+//         dispatch(startLoad());
+
+//         try {
+//             const res = await axios.put(`${BASE_URL}/posts/${id}`);
+//             const post = res.data;
+
+//             dispatch(gotPost(id, post))
+//         } catch (err) {
+//             console.log(err);
+//             const errMsg = err.response.data;
+//             dispatch(showErr(errMsg));
+//         }
+//     }
+// }
 
 function gotTitles(titles) {
     return {
