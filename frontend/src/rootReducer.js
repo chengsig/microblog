@@ -3,6 +3,7 @@ import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from ".
 
 const DEFAULT_STATE = {
     posts: {}, //postId as key {postId: {...post, comments: {1: "wow", 2: ""...}}, ...}
+    titles: [] // [{id, title, description} ...]
 };
 
 function rootReducer(state = DEFAULT_STATE, action) {
