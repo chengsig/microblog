@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
-import { editPost, deletePost, addComment, deleteComment } from "./actions";
+import { editPost, deletePost, addComment, deleteComment, getPostFromAPI } from "./actions";
 
 class PostDetail extends Component {
     constructor(props) {
@@ -14,6 +14,10 @@ class PostDetail extends Component {
         this.editPost = this.editPost.bind(this);
         this.handlePostRemove = this.handlePostRemove.bind(this);
         this.handleCommentRemove = this.handleCommentRemove.bind(this);
+    }
+
+    componentDidMount(){
+        this.props.getPostFromAPI(this.props.postId);
     }
 
     // changes PostDetail editing state
@@ -52,11 +56,10 @@ class PostDetail extends Component {
             )
         }
     
-        let entries = Object.entries(this.props.post.comments);
-        let comments = entries.map(([id, comment]) => (
-            <div className="Comment" key={id}>
-                <p>{comment}</p>
-                <i id={id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+        let comments = this.props.post.comments.map(c => (
+            <div className="Comment" key={c.id}>
+                <p>{c.text}</p>
+                <i id={c.id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
             </div>
         ))
 
@@ -89,5 +92,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
     mapStateToProps,
-    { editPost, deletePost, addComment, deleteComment }
+    { editPost, deletePost, addComment, deleteComment, getPostFromAPI }
 )(PostDetail);

@@ -13,7 +13,7 @@ class PostList extends Component {
     render() {
         let titles = this.props.titles.map(t => (
             <PostCard key={t.id}
-                id={t.id}
+                id={t.id} 
                 title={t.title}
                 description={t.description}
             />)

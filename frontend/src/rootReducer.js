@@ -1,4 +1,4 @@
-import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES, LOAD_POST } from "./actionTypes";
 
 
 const DEFAULT_STATE = {
@@ -81,12 +81,27 @@ function rootReducer(state = DEFAULT_STATE, action) {
         // return { ...stateCopy };
     }
 
+    // retrieves all titles from database and adds to store state
     if (action.type === LOAD_TITLES){
         let titles = action.titles;
 
         return { 
             ...state, 
             titles: [ ...titles ]
+        }
+    }
+
+    // retrieves one post detail from database and adds to store state
+    if (action.type === LOAD_POST){
+        let post = action.post;
+        let id = action.postId; 
+
+        return { 
+            ...state, 
+            posts: { 
+                     ...state.posts, 
+                     [id]: { ...post }
+            } 
         }
     }
 

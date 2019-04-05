@@ -1,4 +1,4 @@
-import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, SHOW_SPINNER, LOAD_TITLES, SHOW_ERR } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES, LOAD_POST, SHOW_SPINNER, SHOW_ERR } from "./actionTypes";
 import uuid from "uuid/v4";
 import axios from "axios";
 
@@ -56,15 +56,26 @@ export function getTitlesFromAPI() {
             dispatch(gotTitles(titles))
         } catch (err) {
             console.log(err);
-            // const errMsg = err.response.data;
-            // dispatch(showErr(errMsg));
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
         }
     }
 }
 
-function startLoad() {
-    return {
-        type: SHOW_SPINNER
+export function getPostFromAPI(id) {
+    return async function (dispatch) {
+        dispatch(startLoad());
+
+        try {
+            const res = await axios.get(`${BASE_URL}/posts/${id}`);
+            const post = res.data;
+
+            dispatch(gotPost(id, post))
+        } catch (err) {
+            console.log(err);
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
     }
 }
 
@@ -75,9 +86,23 @@ function gotTitles(titles) {
     };
 }
 
-// function showErr(msg) {
-//     return {
-//         type: SHOW_ERR,
-//         msg
-//     };
-// }
+function gotPost(id, post) {
+    return {
+        type: LOAD_POST,
+        postId: id, 
+        post
+    };
+}
+
+function startLoad() {
+    return {
+        type: SHOW_SPINNER
+    }
+}
+
+function showErr(msg) {
+    return {
+        type: SHOW_ERR,
+        msg
+    };
+}
