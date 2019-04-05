@@ -11,11 +11,10 @@ export function addPost(post) {
     }
 }
 
-export function editPost(id, post) {
+export function editPost(post) {
     return {
         type: EDIT_POST,
-        payload: post,
-        postId: id
+        post
     }
 }
 
@@ -95,22 +94,22 @@ export function addPostToAPI(post) {
     }
 }
 
-// export function editPostFromAPI(id, post) {
-//     return async function (dispatch) {
-//         dispatch(startLoad());
+export function editPostFromAPI(id, post) {
+    return async function (dispatch) {
+        dispatch(startLoad());
 
-//         try {
-//             const res = await axios.put(`${BASE_URL}/posts/${id}`);
-//             const post = res.data;
+        try {
+            const res = await axios.put(`${BASE_URL}/posts/${id}`, post);
+            const updatedPost = res.data;
 
-//             dispatch(gotPost(id, post))
-//         } catch (err) {
-//             console.log(err);
-//             const errMsg = err.response.data;
-//             dispatch(showErr(errMsg));
-//         }
-//     }
-// }
+            dispatch(editPost(updatedPost))
+        } catch (err) {
+            console.log(err);
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
+    }
+}
 
 function gotTitles(titles) {
     return {

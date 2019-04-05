@@ -20,11 +20,10 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     //editing a post. if post has comments, move comments over.
     if (action.type === EDIT_POST) {
-        let postId = action.postId;
-        let oldComments = state.posts[postId].comments;
+        // let oldComments = state.posts[postId].comments;
         return {
             ...state,
-            posts: { ...state.posts, [postId]: { ...action.payload, comments: { ...oldComments } } }
+            titles: [ ...state.titles, action.post ]
         }
     }
 

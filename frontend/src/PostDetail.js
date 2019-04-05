@@ -2,26 +2,34 @@ import React, { Component } from "react";
 import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
-import { editPost, deletePost, addComment, deleteComment, getPostFromAPI } from "./actions";
+import { deletePost, addComment, deleteComment, getPostFromAPI } from "./actions";
+// import { ESPIPE } from "constants";
 
 class PostDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isEditing: false,
+            isLoading: true
         }
 
-        this.editPost = this.editPost.bind(this);
+        this.toggleEditState = this.toggleEditState.bind(this);
         this.handlePostRemove = this.handlePostRemove.bind(this);
         this.handleCommentRemove = this.handleCommentRemove.bind(this);
     }
 
-    componentDidMount(){
-        this.props.getPostFromAPI(this.props.postId);
+    async componentDidMount() {
+        if (this.props.post === undefined){
+            await this.props.getPostFromAPI(this.props.postId);
+            this.setState({
+                isLoading: false
+            });
+            console.log("yo", this.state)
+        }
     }
 
     // changes PostDetail editing state
-    editPost(e) {
+    toggleEditState(e) {
         this.setState({
             isEditing: true
         })
@@ -41,27 +49,29 @@ class PostDetail extends Component {
     // renders post detail
     // title, description, and body
     render() {
-        if (this.props.post === undefined) {
-            this.props.history.push("/");
-            return null;
-        }
+        console.log("did we get to PostDetail?", this.props.post)
+        if (this.state.isLoading) {
+            return <p>"...loading"</p>;
+        } 
 
         let editForm = null;
         if (this.state.isEditing) {
             editForm = (
                 <NewOrEditPostForm id={this.props.postId}
-                    handlePostEdit={this.props.editPost}
                     isEditing={this.state.isEditing}
                     history={this.props.history} />
             )
         }
-    
-        let comments = this.props.post.comments.map(c => (
-            <div className="Comment" key={c.id}>
-                <p>{c.text}</p>
-                <i id={c.id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
-            </div>
-        ))
+
+        let comments = null;
+        if (this.props.post !== undefined){
+            comments = this.props.post.comments.map(c => (
+                <div className="Comment" key={c.id}>
+                    <p>{c.text}</p>
+                    <i id={c.id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+                </div>
+            ))
+        }
 
         return (
             <div className="PostDetail">
@@ -69,7 +79,7 @@ class PostDetail extends Component {
                     <h2>{this.props.post.title}</h2>
                     <i>{this.props.post.description}</i>
                     <p>{this.props.post.body}</p>
-                    <i className="fas fa-edit" onClick={this.editPost}></i>
+                    <i className="fas fa-edit" onClick={this.toggleEditState}></i>
                     <i className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
                     {editForm}
                 </div>
@@ -92,5 +102,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
     mapStateToProps,
-    { editPost, deletePost, addComment, deleteComment, getPostFromAPI }
+    { deletePost, addComment, deleteComment, getPostFromAPI }
 )(PostDetail);
