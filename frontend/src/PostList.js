@@ -2,34 +2,38 @@ import React, { Component } from "react";
 import PostCard from "./PostCard";
 import { connect } from "react-redux";
 
+import { getTitlesFromAPI } from "./actions";
+
 class PostList extends Component {
+    componentDidMount() {
+        this.props.getTitlesFromAPI();
+    }
+
     // renders list of PostCards
     render() {
-        let posts = [];
-        for (let id in this.props.posts) {
-            posts.push(
-            <PostCard key={id}
-                id={id}
-                title={ this.props.posts[id].title }
-                description={ this.props.posts[id].description }
-                body={ this.props.posts[id].body }/>
-            )
-        }
+        let titles = this.props.titles.map(t => (
+            <PostCard key={t.id}
+                id={t.id}
+                title={t.title}
+                description={t.description}
+            />)
+        )
 
         return (
             <div className="PostList">
-                {posts}
+                {titles}
             </div>
         );
     }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
-        posts: state.posts
+        titles: state.titles
     }
 }
 
 export default connect(
     mapStateToProps,
+    { getTitlesFromAPI }
 )(PostList);

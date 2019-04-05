@@ -1,4 +1,4 @@
-import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES } from "./actionTypes";
 
 
 const DEFAULT_STATE = {
@@ -79,6 +79,15 @@ function rootReducer(state = DEFAULT_STATE, action) {
         //note to self for bug journal later             let stateCopy = { ...state }
         // delete stateCopy.posts[postId].comments[commentId];
         // return { ...stateCopy };
+    }
+
+    if (action.type === LOAD_TITLES){
+        let titles = action.titles;
+
+        return { 
+            ...state, 
+            titles: [ ...titles ]
+        }
     }
 
     return state;

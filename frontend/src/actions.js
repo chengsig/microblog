@@ -2,7 +2,7 @@ import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, SHOW_SPI
 import uuid from "uuid/v4";
 import axios from "axios";
 
-const BASE_URL = 'localhost:5000/api';
+const BASE_URL = 'http://localhost:5000/api';
 
 export function addPost(post) {
     return {
@@ -11,7 +11,6 @@ export function addPost(post) {
         postId: uuid()
     }
 }
-
 
 export function editPost(id, post) {
     return {
@@ -49,13 +48,16 @@ export function deleteComment(postId, commentId) {
 export function getTitlesFromAPI() {
     return async function (dispatch) {
         dispatch(startLoad());
+
         try {
             const res = await axios.get(`${BASE_URL}/posts`);
-            const { titles } = res.data;
+            const titles = res.data;
+
             dispatch(gotTitles(titles))
         } catch (err) {
-            const errMsg = err.response.data;
-            dispatch(showErr(errMsg));
+            console.log(err);
+            // const errMsg = err.response.data;
+            // dispatch(showErr(errMsg));
         }
     }
 }
@@ -73,9 +75,9 @@ function gotTitles(titles) {
     };
 }
 
-function showErr(msg) {
-    return {
-        type: SHOW_ERR,
-        msg
-    };
-}
+// function showErr(msg) {
+//     return {
+//         type: SHOW_ERR,
+//         msg
+//     };
+// }
