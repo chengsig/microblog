@@ -11,7 +11,6 @@ class PostList extends Component {
 
     // renders list of PostCards
     render() {
-        console.log("we got to postlist!")
         let titles = this.props.titles.map(t => (
             <PostCard key={t.id}
                 id={t.id} 

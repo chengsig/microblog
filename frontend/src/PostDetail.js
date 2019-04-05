@@ -3,7 +3,6 @@ import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
 import { deletePost, addComment, deleteComment, getPostFromAPI } from "./actions";
-// import { ESPIPE } from "constants";
 
 class PostDetail extends Component {
     constructor(props) {
@@ -24,7 +23,7 @@ class PostDetail extends Component {
             this.setState({
                 isLoading: false
             });
-            console.log("yo", this.state)
+            
         }
     }
 
@@ -49,7 +48,7 @@ class PostDetail extends Component {
     // renders post detail
     // title, description, and body
     render() {
-        console.log("did we get to PostDetail?", this.props.post)
+    
         if (this.state.isLoading) {
             return <p>"...loading"</p>;
         } 

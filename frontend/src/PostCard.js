@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 class PostCard extends Component {
     // renders link to post & post description
     render() {
-        console.log("we got to postcard!")
         return (
             <div className="PostCard">
                 <Link to={`/${this.props.id}`}>{ this.props.title }</Link>

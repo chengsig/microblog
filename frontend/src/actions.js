@@ -68,7 +68,7 @@ export function getPostFromAPI(id) {
             const res = await axios.get(`${BASE_URL}/posts/${id}`);
             const post = res.data;
 
-            dispatch(gotPost(post))
+            dispatch(gotPost(id, post))
         } catch (err) {
             console.log(err);
             const errMsg = err.response.data;
