@@ -14,7 +14,6 @@ class PostDetail extends Component {
         this.editing = this.editing.bind(this);
         this.handlePostRemove = this.handlePostRemove.bind(this);
         this.handleCommentRemove = this.handleCommentRemove.bind(this);
-
     }
 
     // changes PostDetail editing state
@@ -52,11 +51,9 @@ class PostDetail extends Component {
                     history={this.props.history} />
             )
         }
-
     
         let entries = Object.entries(this.props.post.comments);
         let comments = entries.map(c => (
-            console.log('what is c?', c[1]),
             <div className="Comment" key={c[0]}>
                 <p>{c[1]}</p>
                 <i id={c[0]} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
