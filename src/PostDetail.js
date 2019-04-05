@@ -11,13 +11,13 @@ class PostDetail extends Component {
             isEditing: false,
         }
 
-        this.editing = this.editing.bind(this);
+        this.editPost = this.editPost.bind(this);
         this.handlePostRemove = this.handlePostRemove.bind(this);
         this.handleCommentRemove = this.handleCommentRemove.bind(this);
     }
 
     // changes PostDetail editing state
-    editing(e) {
+    editPost(e) {
         this.setState({
             isEditing: true
         })
@@ -53,10 +53,10 @@ class PostDetail extends Component {
         }
     
         let entries = Object.entries(this.props.post.comments);
-        let comments = entries.map(c => (
-            <div className="Comment" key={c[0]}>
-                <p>{c[1]}</p>
-                <i id={c[0]} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
+        let comments = entries.map(([id, comment]) => (
+            <div className="Comment" key={id}>
+                <p>{comment}</p>
+                <i id={id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
             </div>
         ))
 
@@ -66,7 +66,7 @@ class PostDetail extends Component {
                     <h2>{this.props.post.title}</h2>
                     <i>{this.props.post.description}</i>
                     <p>{this.props.post.body}</p>
-                    <i className="fas fa-edit" onClick={this.editing}></i>
+                    <i className="fas fa-edit" onClick={this.editPost}></i>
                     <i className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
                     {editForm}
                 </div>

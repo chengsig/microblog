@@ -50,10 +50,6 @@ class NewOrEditPostForm extends Component {
     // renders form for adding a new post 
     render() {
         let formName = this.props.isEditing ? "Edit Post" : "New Post";
-        // let placeholderTitle = this.props.post.title || "";
-        // let placeholderDescription = this.props.isEditing ? this.props.posts.id.description : "";
-        // let placeholderBody = this.props.isEditing ? this.props.posts.id.body : "";
-        console.log(this.props.post);
         return (
             <div className="NewOrEditPostForm">
                 <p>{formName}</p>
