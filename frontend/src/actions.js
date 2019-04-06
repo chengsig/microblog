@@ -21,7 +21,7 @@ export function editPost(post) {
 export function deletePost(postId) {
     return {
         type: DELETE_POST,
-        payload: postId
+        postId
     }
 }
 
@@ -103,6 +103,23 @@ export function editPostFromAPI(id, post) {
             const updatedPost = res.data;
 
             dispatch(editPost(updatedPost))
+        } catch (err) {
+            console.log(err);
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
+    }
+}
+
+export function deletePostFromAPI(id) {
+    return async function (dispatch) {
+        dispatch(startLoad());
+
+        try {
+            let res = await axios.delete(`${BASE_URL}/posts/${id}`);
+            const resMsg = res.data;
+            console.log("HELLOOOO", resMsg)
+            dispatch(deletePost(id))
         } catch (err) {
             console.log(err);
             const errMsg = err.response.data;

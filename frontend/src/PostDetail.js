@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
-import { deletePost, addComment, deleteComment, getPostFromAPI } from "./actions";
+// import { Redirect} from 'react-router-dom';
+import { addComment, deleteComment, getPostFromAPI, deletePostFromAPI } from "./actions";
 
 class PostDetail extends Component {
     constructor(props) {
@@ -36,8 +37,9 @@ class PostDetail extends Component {
 
     // calls handleDelete, which removes post from App state and redirects to "/"
     handlePostRemove(e) {
-        this.props.deletePost(this.props.postId);
+        this.props.deletePostFromAPI(this.props.postId);
         this.props.history.push("/");
+        //return <Redirect to="/"/>
     }
 
     // calls handleCommentDelete, removes comment from App state by comment id
@@ -101,5 +103,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
     mapStateToProps,
-    { deletePost, addComment, deleteComment, getPostFromAPI }
+    { addComment, deleteComment, getPostFromAPI, deletePostFromAPI }
 )(PostDetail);

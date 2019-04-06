@@ -21,23 +21,32 @@ function rootReducer(state = DEFAULT_STATE, action) {
     //editing a post. if post has comments, move comments over.
     if (action.type === EDIT_POST) {
         // let oldComments = state.posts[postId].comments;
+        let postId = action.post.id
         let oldTitles = state.titles.filter(t => t.id !== action.post.id)
         return {
             ...state,
-            titles: [ ...oldTitles, {...action.post} ]
+            titles: [ ...oldTitles, {...action.post} ],
+            posts: { ...state.posts, 
+                     [postId]: { ...action.post[postId], 
+                                 comments: [ ...action.post[postId].comments ]
+                                }
+                    }
         }
     }
 
     //immutability remove key from object by destructuring
     if (action.type === DELETE_POST) {
-        let postId = action.payload;
-
+        let postId = action.postId;
+        
         let updatedPosts = { ...state.posts }
         delete updatedPosts[postId]
 
+        let updatedTitles = state.titles.filter(t => t.id !== +postId)
+        console.log(updatedTitles)
         return {
             ...state,
-            posts: updatedPosts
+            posts: { ...updatedPosts },
+            titles: [ ...updatedTitles ]
         }
         // for self note delete later: delete stateCopy.posts[postId]; // mutating
     }
