@@ -66,7 +66,6 @@ class PostDetail extends Component {
 
         let comments = null;
         if (this.props.post !== undefined){
-            console.log(this.props.post.comments)
             comments = this.props.post.comments.map(c => 
                     <div className="Comment" key={c.id}>
                         <p>{c.text}</p>

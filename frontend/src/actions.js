@@ -2,7 +2,7 @@ import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TIT
 import uuid from "uuid/v4";
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL + "/api" || 'http://localhost:5000/api';
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 export function addPost(post) {
     return {
@@ -47,7 +47,7 @@ export function getTitlesFromAPI() {
         dispatch(startLoad());
 
         try {
-            const res = await axios.get(`${BASE_URL}/posts`);
+            const res = await axios.get(`${BASE_URL}/api/posts`);
             const titles = res.data;
 
             dispatch(gotTitles(titles))
@@ -64,7 +64,7 @@ export function getPostFromAPI(id) {
         dispatch(startLoad());
 
         try {
-            const res = await axios.get(`${BASE_URL}/posts/${id}`);
+            const res = await axios.get(`${BASE_URL}/api/posts/${id}`);
             const post = res.data;
 
             dispatch(gotPost(id, post))
@@ -81,7 +81,7 @@ export function addPostToAPI(post) {
         dispatch(startLoad());
 
         try {
-            const res = await axios.post(`${BASE_URL}/posts`, post);
+            const res = await axios.post(`${BASE_URL}/api/posts`, post);
             const createdPost = res.data;
 
             dispatch(addPost(createdPost))
@@ -98,7 +98,7 @@ export function editPostFromAPI(id, post) {
         dispatch(startLoad());
 
         try {
-            const res = await axios.put(`${BASE_URL}/posts/${id}`, post);
+            const res = await axios.put(`${BASE_URL}/api/posts/${id}`, post);
             const updatedPost = res.data;
 
             dispatch(editPost(updatedPost))
@@ -115,7 +115,7 @@ export function deletePostFromAPI(id) {
         dispatch(startLoad());
 
         try {
-            let res = await axios.delete(`${BASE_URL}/posts/${id}`);
+            let res = await axios.delete(`${BASE_URL}/api/posts/${id}`);
             const resMsg = res.data;
             
             dispatch(deletePost(id))
@@ -130,7 +130,7 @@ export function deletePostFromAPI(id) {
 export function addCommentToAPI(postId, text) {
     return async function (dispatch) {
         try {
-            const res = await axios.post(`${BASE_URL}/posts/${postId}/comments`, text);
+            const res = await axios.post(`${BASE_URL}/api/posts/${postId}/comments`, text);
             dispatch(addComment(postId, text))
             return res.data;
         } catch (err) {
@@ -143,7 +143,7 @@ export function addCommentToAPI(postId, text) {
 export function deleteCommentFromAPI(postId, commentId) {
     return async function (dispatch) {
         try {
-            const res = await axios.delete(`${BASE_URL}/posts/${postId}/comments/${commentId}`);
+            const res = await axios.delete(`${BASE_URL}/api/posts/${postId}/comments/${commentId}`);
             dispatch(deleteComment(postId, commentId));
             return res.data;
         } catch (err){
