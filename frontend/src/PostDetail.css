@@ -1,0 +1,35 @@
+.PostDetail-post {
+    width: 600px;
+    margin: auto;
+}
+
+#title {
+    text-align: left;
+}
+
+#description {
+    text-align: left;
+}
+
+#body {
+    text-align: left;
+}
+
+#edit {
+    color: royalblue;
+    margin: 5px;
+    float: right;
+}
+
+#trash {
+    float: right;
+    color: red;
+    margin: 5px;
+}
+
+.Pcomments {
+    text-align: right;
+    margin-right: 20%;
+}
+
+

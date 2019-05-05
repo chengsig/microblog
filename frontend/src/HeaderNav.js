@@ -12,7 +12,7 @@ class HeaderNav extends Component {
         return (
             <nav>
                 <div className="jumbotron">
-                    <h1 className="display-4">Microblog</h1>
+                    <h1 id="Microblog" className="display-4">Microblog</h1><br />
                     <p className="lead">Get in the Rithm of blogging!</p>
                     <p id="blog"><NavLink exact to="/" activeStyle={activeStyle}>Blog</NavLink></p>
                     <p id="add"><NavLink to="/new" activeStyle={activeStyle}>Add a new post</NavLink></p>

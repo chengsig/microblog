@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
-// import { Redirect} from 'react-router-dom';
 import { addComment, deleteComment, getPostFromAPI, deletePostFromAPI } from "./actions";
+import './PostDetail.css';
 
 class PostDetail extends Component {
     constructor(props) {
@@ -77,14 +77,18 @@ class PostDetail extends Component {
         return (
             <div className="PostDetail">
                 <div className="PostDetail-post">
-                    <h2>{this.props.post.title}</h2>
-                    <i>{this.props.post.description}</i>
-                    <p>{this.props.post.body}</p>
-                    <i className="fas fa-edit" onClick={this.toggleEditState}></i>
-                    <i className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
+                    <h1 id="title">{this.props.post.title}</h1>
+                    <i id="edit" className="fas fa-edit" onClick={this.toggleEditState}></i>
+                    <i id="trash" className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
+                    <br />
+                    
+                    <p id="description"><i>{this.props.post.description}</i></p>
+                    <p id="body"><h4>{this.props.post.body}</h4></p>
+                    
                     {editForm}
                 </div>
-                <div className="PostDetail-comments">
+                <br />
+                <div className="Pcomments">
                     <h3>Comments</h3>
                     {comments}
                     <AddCommentForm postId={this.props.postId}
