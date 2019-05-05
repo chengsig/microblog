@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { addComment } from "./actions";
+import { connect } from "react-redux";
 
 class AddCommentForm extends Component {
     constructor(props) {
@@ -20,9 +22,7 @@ class AddCommentForm extends Component {
     // App state. resets AddCommentForm state
     handleSubmit(e) {
         e.preventDefault();
-        
-        this.props.handleCommentAdd(this.props.postId, this.state);
-       
+        this.props.addComment(this.props.postId, this.state);
         this.setState({
             comment: "", 
         });
@@ -37,7 +37,6 @@ class AddCommentForm extends Component {
                            value={this.state.comment}
                            onChange={this.handleChange}
                            placeholder="New Comment" />
-                           
                     <button>Add</button>
                 </form>
             </div>
@@ -45,4 +44,13 @@ class AddCommentForm extends Component {
     }
 }
 
-export default AddCommentForm;
+function mapStateToProps(state, ownProps) {
+    return {
+        post: state.posts[ownProps.postId]
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { addComment }
+)(AddCommentForm);

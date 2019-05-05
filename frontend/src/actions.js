@@ -118,7 +118,7 @@ export function deletePostFromAPI(id) {
         try {
             let res = await axios.delete(`${BASE_URL}/posts/${id}`);
             const resMsg = res.data;
-            console.log("HELLOOOO", resMsg)
+            
             dispatch(deletePost(id))
         } catch (err) {
             console.log(err);

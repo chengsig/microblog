@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewOrEditPostForm from './NewOrEditPostForm';
 import AddCommentForm from './AddCommentForm';
 import { connect } from "react-redux";
-import { addComment, deleteComment, getPostFromAPI, deletePostFromAPI } from "./actions";
+import { deleteComment, getPostFromAPI, deletePostFromAPI } from "./actions";
 import './PostDetail.css';
 
 class PostDetail extends Component {
@@ -47,10 +47,10 @@ class PostDetail extends Component {
         this.props.deleteComment(this.props.postId, e.target.id);
     }
 
+
     // renders post detail
     // title, description, and body
     render() {
-    
         if (this.state.isLoading) {
             return <p>"...loading"</p>;
         } 
@@ -64,14 +64,16 @@ class PostDetail extends Component {
             )
         }
 
-        let comments = null;
+        let comments = [];
         if (this.props.post !== undefined){
-            comments = this.props.post.comments.map(c => (
-                <div className="Comment" key={c.id}>
-                    <p>{c.text}</p>
-                    <i id={c.id} className="fas fa-trash-alt" onClick={this.handleCommentRemove}></i>
-                </div>
-            ))
+            for (let key in this.props.post.comments) {
+                comments.push(
+                    <div className="Comment" key={key}>
+                        <p>{this.props.post.comments[key]}</p>
+                        <i id={key} className="far fa-trash-alt" onClick={this.handleCommentRemove}></i>
+                    </div>
+                )
+            }
         }
 
         return (
@@ -83,7 +85,7 @@ class PostDetail extends Component {
                     <br />
                     
                     <p id="description"><i>{this.props.post.description}</i></p>
-                    <p id="body"><h4>{this.props.post.body}</h4></p>
+                    <h4 id="body">{this.props.post.body}</h4>
                     
                     {editForm}
                 </div>
@@ -91,8 +93,7 @@ class PostDetail extends Component {
                 <div className="Pcomments">
                     <h3>Comments</h3>
                     {comments}
-                    <AddCommentForm postId={this.props.postId}
-                        handleCommentAdd={this.props.addComment} />
+                    <AddCommentForm postId={this.props.postId}/>
                 </div>
             </div>
         );
@@ -107,5 +108,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
     mapStateToProps,
-    { addComment, deleteComment, getPostFromAPI, deletePostFromAPI }
+    { deleteComment, getPostFromAPI, deletePostFromAPI }
 )(PostDetail);
