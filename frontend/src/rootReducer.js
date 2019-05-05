@@ -2,7 +2,7 @@ import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TIT
 
 
 const DEFAULT_STATE = {
-    posts: {}, //postId as key {postId: {...post, comments: {1: "wow", 2: ""...}}, ...}
+    posts: {}, //postId as key {postId: {...post, comments: [{1: "wow"}, {2: ""...}], ...}
     titles: [] // [{id, title, description} ...]
 };
 
@@ -42,7 +42,6 @@ function rootReducer(state = DEFAULT_STATE, action) {
         delete updatedPosts[postId]
 
         let updatedTitles = state.titles.filter(t => t.id !== +postId)
-        console.log(updatedTitles)
         return {
             ...state,
             posts: { ...updatedPosts },
@@ -55,20 +54,19 @@ function rootReducer(state = DEFAULT_STATE, action) {
     if (action.type === ADD_COMMENT) {
         let postId = action.postId;
         let currPost = state.posts[postId];
-
+       
         let result = {
             posts: {
                 ...state.posts,
                 [action.postId]: {//postId
                     ...currPost,
-                    comments: {
+                    comments: [
                         ...currPost.comments,
-                        [action.commentId]: action.payload.comment
-                    }
+                        {id: [action.commentId], text: action.payload.text}
+                    ]
                 }
             }
         }
-
         return result
     }
 
@@ -77,8 +75,7 @@ function rootReducer(state = DEFAULT_STATE, action) {
         let postId = action.postId;
         let commentId = action.commentId;
 
-        let updatedComments = { ...state.posts[postId].comments }
-        delete updatedComments[commentId]
+        let updatedComments = state.posts[postId].comments.filter(c => c.id !== +commentId)
 
         return {
             ...state,

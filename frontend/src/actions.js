@@ -25,10 +25,10 @@ export function deletePost(postId) {
     }
 }
 
-export function addComment(postId, comment) {
+export function addComment(postId, text) {
     return {
         type: ADD_COMMENT,
-        payload: comment,
+        payload: text,
         postId,
         commentId: uuid()
     }
@@ -40,7 +40,6 @@ export function deleteComment(postId, commentId) {
         postId,
         commentId
     }
-
 }
 
 export function getTitlesFromAPI() {
@@ -122,6 +121,32 @@ export function deletePostFromAPI(id) {
             dispatch(deletePost(id))
         } catch (err) {
             console.log(err);
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
+    }
+}
+
+export function addCommentToAPI(postId, text) {
+    return async function (dispatch) {
+        try {
+            const res = await axios.post(`${BASE_URL}/posts/${postId}/comments`, text);
+            dispatch(addComment(postId, text))
+            return res.data;
+        } catch (err) {
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
+    }
+}
+
+export function deleteCommentFromAPI(postId, commentId) {
+    return async function (dispatch) {
+        try {
+            const res = await axios.delete(`${BASE_URL}/posts/${postId}/comments/${commentId}`);
+            dispatch(deleteComment(postId, commentId));
+            return res.data;
+        } catch (err){
             const errMsg = err.response.data;
             dispatch(showErr(errMsg));
         }

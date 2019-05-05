@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { addComment } from "./actions";
+import { addCommentToAPI } from "./actions";
 import { connect } from "react-redux";
 
 class AddCommentForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            comment: "" 
+            text: "" 
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,11 +20,11 @@ class AddCommentForm extends Component {
 
     // on form submit, calls handleAdd which will add new comment to 
     // App state. resets AddCommentForm state
-    handleSubmit(e) {
+    async handleSubmit(e) {
         e.preventDefault();
-        this.props.addComment(this.props.postId, this.state);
+        await this.props.addCommentToAPI(this.props.postId, this.state);
         this.setState({
-            comment: "", 
+            text: "", 
         });
     }
 
@@ -33,7 +33,7 @@ class AddCommentForm extends Component {
         return (
             <div className="AddCommentform">
                 <form className="AddCommentForm-comment" onSubmit={ this.handleSubmit }>
-                    <input name="comment"
+                    <input name="text"
                            value={this.state.comment}
                            onChange={this.handleChange}
                            placeholder="New Comment" />
@@ -52,5 +52,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
     mapStateToProps,
-    { addComment }
+    { addCommentToAPI }
 )(AddCommentForm);
