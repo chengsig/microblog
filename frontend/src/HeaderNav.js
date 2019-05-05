@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-//import './HeaderNav.css';
+import './HeaderNav.css';
 
 class HeaderNav extends Component {
     render() {
@@ -11,9 +11,13 @@ class HeaderNav extends Component {
         // render full nav bar
         return (
             <nav>
-                <h1>Microblog</h1>
-                <p><NavLink exact to="/" activeStyle={activeStyle}>Blog</NavLink></p>
-                <p><NavLink to="/new" activeStyle={activeStyle}>Add a new post</NavLink></p>
+                <div className="jumbotron">
+                    <h1 className="display-4">Microblog</h1>
+                    <p className="lead">Get in the Rithm of blogging!</p>
+                    <p id="blog"><NavLink exact to="/" activeStyle={activeStyle}>Blog</NavLink></p>
+                    <p id="add"><NavLink to="/new" activeStyle={activeStyle}>Add a new post</NavLink></p>
+                </div>
+                <p className="text-center">Welcome to <b>Microblog</b>, our innovative site for communicating on the information superhighway.</p>
             </nav>
         );
     }

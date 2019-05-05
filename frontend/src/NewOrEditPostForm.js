@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addPostToAPI, editPostFromAPI } from "./actions";
+import "./NewOrEditPostForm.css";
 
 class NewOrEditPostForm extends Component {
     constructor(props) {
@@ -52,37 +53,37 @@ class NewOrEditPostForm extends Component {
         let formName = this.props.isEditing ? "Edit Post" : "New Post";
         return (
             <div className="NewOrEditPostForm">
-                <p>{formName}</p>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="NewOrEditPostForm-title">
+                    <h3>{formName}</h3>
+                    <div className="form-group title">
                         <label htmlFor="title">Title: </label>
-                        <input name="title"
+                        <input className="form-control" name="title"
                             id="title"
                             onChange={this.handleChange}
                             value={this.state.title} 
                             // placeholder={placeholderTitle}
                             />
                     </div>
-                    <div className="NewOrEditPostForm-description">
+                    <div className="form-group description">
                         <label htmlFor="description">Description: </label>
-                        <input name="description"
+                        <input className="form-control" name="description"
                             id="description"
                             onChange={this.handleChange}
                             value={this.state.description} 
                             // placeholder={placeholderDescription}
                             />
                     </div>
-                    <div className="NewOrEditPostForm-body">
+                    <div className="form-group body">
                         <label htmlFor="body">Body: </label>
-                        <input name="body"
+                        <textarea className="form-control" name="body"
                             id="body"
                             onChange={this.handleChange}
                             value={this.state.body} 
                             // placeholder={placeholderBody}
-                            />
+                        ></textarea>
                     </div>
-                    <button>Save</button>
-                    <button onClick={ this.handleCancel }>Cancel</button>
+                    <button className="btn btn-primary">Save</button>
+                    <button className="btn btn-primary" onClick={ this.handleCancel }>Cancel</button>
                 </form>
             </div>
         );

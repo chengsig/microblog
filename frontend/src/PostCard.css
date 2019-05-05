@@ -1,0 +1,8 @@
+.PostCard {
+    width: 300px;
+    margin: 5px auto;
+    align-items: center;
+    justify-content: space-around;
+    float: none;
+    position: relative;
+}

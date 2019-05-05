@@ -1,0 +1,19 @@
+.jumbotron {
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 15px 0;
+    align-items: center;
+    justify-content: space-around;
+    width: 700px;
+    float: none
+}
+
+#blog {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+#add {
+    margin-left: 20px;
+    display: inline-block;
+}
