@@ -5,12 +5,13 @@ import { connect } from "react-redux";
 import { getTitlesFromAPI } from "./actions";
 
 class PostList extends Component {
-    componentDidMount() {
-        this.props.getTitlesFromAPI();
+    async componentDidMount() {
+        await this.props.getTitlesFromAPI();
     }
 
     // renders list of PostCards
     render() {
+        console.log('did postlist render?', this.props.titles)
         let titles = this.props.titles.map(t => (
             <PostCard key={t.id}
                 id={t.id} 
