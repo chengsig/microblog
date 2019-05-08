@@ -7,3 +7,5 @@ export const LOAD_TITLES = "LOAD_TITLES";
 export const LOAD_POST = "LOAD_POST";
 export const SHOW_SPINNER = "SHOW_SPINNER";
 export const SHOW_ERR = "SHOW_ERR";
+export const UPDATE_VOTE = "UPDATE_VOTE";
+

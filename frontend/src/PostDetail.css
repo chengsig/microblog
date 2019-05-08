@@ -27,6 +27,21 @@
     margin: 5px;
 }
 
+#vote-up {
+    float: right;
+    color: green;
+    margin: 5px;
+}
+
+#vote-down {
+    float: right;
+    margin: 5px;
+}
+
+#votes {
+    float: right;
+}
+
 .Pcomments {
     text-align: right;
     margin-right: 20%;

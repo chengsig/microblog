@@ -1,4 +1,4 @@
-import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES, LOAD_POST } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES, LOAD_POST, UPDATE_VOTE } from "./actionTypes";
 
 
 const DEFAULT_STATE = {
@@ -113,6 +113,11 @@ function rootReducer(state = DEFAULT_STATE, action) {
             } 
         }
     }
+
+    // update votes information for a post
+    // if (action.type === UPDATE_VOTE) {
+
+    // }
 
     return state;
 }

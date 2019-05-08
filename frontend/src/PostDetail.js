@@ -77,9 +77,14 @@ class PostDetail extends Component {
         return (
             <div className="PostDetail">
                 <div className="PostDetail-post">
+                    <button id="votes" type="button" className="btn btn-light">
+                        Votes: <span className="badge badge-light">0</span>
+                    </button>
                     <h1 id="title">{this.props.post.title}</h1>
-                    <i id="edit" className="fas fa-edit" onClick={this.toggleEditState}></i>
                     <i id="trash" className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
+                    <i id="edit" className="fas fa-edit" onClick={this.toggleEditState}></i>
+                    <i id="vote-down" class="far fa-thumbs-down"></i>
+                    <i id="vote-up" class="far fa-thumbs-up"></i>
                     <br />
                     <p id="description"><i>{this.props.post.description}</i></p>
                     <h4 id="body">{this.props.post.body}</h4>
@@ -99,7 +104,8 @@ class PostDetail extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        post: state.posts[ownProps.postId]
+        post: state.posts[ownProps.postId],
+        title: state.title
     }
 }
 

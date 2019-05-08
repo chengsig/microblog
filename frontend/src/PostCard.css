@@ -6,3 +6,7 @@
     float: none;
     position: relative;
 }
+
+#vote-area {
+    background-color: lightgray;
+}

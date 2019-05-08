@@ -1,4 +1,4 @@
-import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES, LOAD_POST, SHOW_SPINNER, SHOW_ERR } from "./actionTypes";
+import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TITLES, LOAD_POST, SHOW_SPINNER, SHOW_ERR, UPDATE_VOTE } from "./actionTypes";
 import uuid from "uuid/v4";
 import axios from "axios";
 
@@ -41,6 +41,15 @@ export function deleteComment(postId, commentId) {
         commentId
     }
 }
+
+export function updateVote(postId, delta) {
+    return {
+        type: UPDATE_VOTE,
+        postId,
+        delta
+    }
+}
+
 
 export function getTitlesFromAPI() {
     return async function (dispatch) {
@@ -147,6 +156,19 @@ export function deleteCommentFromAPI(postId, commentId) {
             dispatch(deleteComment(postId, commentId));
             return res.data;
         } catch (err){
+            const errMsg = err.response.data;
+            dispatch(showErr(errMsg));
+        }
+    }
+}
+
+export function updateVoteToAPI(postId, delta) {
+    return async function (dispatch) {
+        try {
+            const res = await axios.post(`${BASE_URL}/api/posts/${postId}/vote/${delta}`);
+            dispatch(updateVote(postId, delta));
+            return res.data;
+        } catch (err) {
             const errMsg = err.response.data;
             dispatch(showErr(errMsg));
         }
