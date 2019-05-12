@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PostCard from "./PostCard";
 import { connect } from "react-redux";
 
-import { getTitlesFromAPI } from "./actions";
+import { getTitlesFromAPI, updateVoteToAPI } from "./actions";
 
 class PostList extends Component {
     constructor(props) {
@@ -27,6 +27,7 @@ class PostList extends Component {
                     title={t.title}
                     description={t.description}
                     votes={t.votes}
+                    updateVoteToAPI={this.props.updateVoteToAPI}
                 />)
             )
         )
@@ -48,5 +49,5 @@ function mapStateToProps(state) {
 
 export default connect(
     mapStateToProps,
-    { getTitlesFromAPI }
+    { getTitlesFromAPI, updateVoteToAPI }
 )(PostList);

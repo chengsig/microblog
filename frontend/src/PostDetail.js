@@ -78,7 +78,7 @@ class PostDetail extends Component {
             <div className="PostDetail">
                 <div className="PostDetail-post">
                     <button id="votes" type="button" className="btn btn-light">
-                        Votes: <span className="badge badge-light">0</span>
+                        Votes: <span className="badge badge-light">{this.props.post.votes}</span>
                     </button>
                     <h1 id="title">{this.props.post.title}</h1>
                     <i id="trash" className="fas fa-trash-alt" onClick={this.handlePostRemove}></i>
