@@ -26,6 +26,7 @@ class PostList extends Component {
                     id={t.id}
                     title={t.title}
                     description={t.description}
+                    votes={t.votes}
                 />)
             )
         )

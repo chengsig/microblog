@@ -101,7 +101,7 @@ function rootReducer(state = DEFAULT_STATE, action) {
     }
 
     // retrieves one post detail from database and adds to store state
-    if (action.type === LOAD_POST){
+    if (action.type === LOAD_POST) {
         let post = action.post;
         let id = action.postId; 
         
@@ -115,9 +115,18 @@ function rootReducer(state = DEFAULT_STATE, action) {
     }
 
     // update votes information for a post
-    // if (action.type === UPDATE_VOTE) {
+    if (action.type === UPDATE_VOTE) {
+        let id = action.postId;
+        let votes = action.votes;
 
-    // }
+        return {
+            ...state,
+            posts: {
+                ...state.posts,
+                [id]: { ...state.posts.id, votes}
+            }
+        }
+    }
 
     return state;
 }

@@ -2,7 +2,7 @@ import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, DELETE_COMMENT, LOAD_TIT
 import uuid from "uuid/v4";
 import axios from "axios";
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+//const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 const BASE_URL = 'https://ca-microblog-backend.herokuapp.com';
 
 export function addPost(post) {
@@ -43,11 +43,11 @@ export function deleteComment(postId, commentId) {
     }
 }
 
-export function updateVote(postId, delta) {
+export function updateVote(postId, votes) {
     return {
         type: UPDATE_VOTE,
         postId,
-        delta
+        votes
     }
 }
 
@@ -167,7 +167,7 @@ export function updateVoteToAPI(postId, delta) {
     return async function (dispatch) {
         try {
             const res = await axios.post(`${BASE_URL}/api/posts/${postId}/vote/${delta}`);
-            dispatch(updateVote(postId, delta));
+            dispatch(updateVote(postId, res.data));
             return res.data;
         } catch (err) {
             const errMsg = err.response.data;
