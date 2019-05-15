@@ -116,15 +116,22 @@ function rootReducer(state = DEFAULT_STATE, action) {
 
     // update votes information for a post
     if (action.type === UPDATE_VOTE) {
-        let id = action.postId;
         let votes = action.votes;
+        let titleIdx = state.titles.findIndex(function(post){
+            return post.id === action.postId;
+        })
+        let updateTitle = state.titles[titleIdx];
+        updateTitle.votes = action.votes.votes;
 
         return {
             ...state,
             posts: {
                 ...state.posts,
-                [id]: { ...state.posts.id, votes}
-            }
+                [action.postId]: { ...state.posts.id, ...votes}
+            },
+            titles: [
+                ...state.titles
+            ]
         }
     }
 

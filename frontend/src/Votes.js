@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+// import { stat } from "fs";
 
 class Votes extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.handleVotesUp = this.handleVotesUp.bind(this);
@@ -24,9 +25,9 @@ class Votes extends Component {
             <div className="Votes">
                 <div id="vote-area" className="class-footer">
                     {this.props.votes} votes
-                    <i id="vote-down" class="far fa-thumbs-down" onClick={this.handleVotesDown}></i>
-                    <i id="vote-up" class="far fa-thumbs-up" onClick={this.handleVotesUp}></i>
-                </div>             
+                    <i id="vote-down" className="far fa-thumbs-down" onClick={this.handleVotesDown}></i>
+                    <i id="vote-up" className="far fa-thumbs-up" onClick={this.handleVotesUp}></i>
+                </div>
             </div>
         );
     }

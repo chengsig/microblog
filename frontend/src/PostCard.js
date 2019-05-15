@@ -6,7 +6,7 @@ import './PostCard.css';
 class PostCard extends Component {
     
     shouldComponentUpdate(nextProps) {
-        console.log(nextProps, "please what is this")
+        // debugger;
         return nextProps.votes !== this.props.votes;
     }
 

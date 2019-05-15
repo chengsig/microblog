@@ -19,7 +19,6 @@ class PostList extends Component {
 
     // renders list of PostCards
     render() {
-        
         let titles = this.state.isLoading ? "...loading" : (
             this.props.titles.map(t => (
                 <PostCard key={t.id}
