@@ -120,9 +120,10 @@ function rootReducer(state = DEFAULT_STATE, action) {
         let titleIdx = state.titles.findIndex(function(post){
             return post.id === action.postId;
         })
-        let updateTitle = state.titles[titleIdx];
+        let updatedTitles = [...state.titles]
+        let updateTitle = updatedTitles[titleIdx];
         updateTitle.votes = action.votes.votes;
-
+        debugger;
         return {
             ...state,
             posts: {
@@ -130,7 +131,7 @@ function rootReducer(state = DEFAULT_STATE, action) {
                 [action.postId]: { ...state.posts.id, ...votes}
             },
             titles: [
-                ...state.titles
+                ...updatedTitles
             ]
         }
     }
